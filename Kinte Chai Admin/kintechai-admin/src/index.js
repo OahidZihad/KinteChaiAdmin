@@ -6,6 +6,8 @@ import App from "./App";
 // import thunk from "redux-thunk";
 import * as serviceWorker from "./serviceWorker";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import { BrowserRouter } from "react-router-dom";
+import { yellow, blueGrey } from "@material-ui/core/colors";
 //import { createstore, applyMiddleware, compose } from "redux";
 //import rootReducer from "./Components/Reducers/rootReducer";
 //import blue from "@material-ui/core/colors/blue";
@@ -18,9 +20,8 @@ import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 
 const theme = createMuiTheme({
   palette: {
-    primary: {
-      main: "#FFFF00",
-    },
+    primary: yellow,
+    secondary: blueGrey,
   },
 });
 
@@ -36,7 +37,9 @@ const theme = createMuiTheme({
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")
