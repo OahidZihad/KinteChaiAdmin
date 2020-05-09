@@ -19,7 +19,6 @@ import {
   PowerSettingsNew,
 } from "@material-ui/icons";
 import logo from "../media/logo1.png";
-import { lightBlue } from "@material-ui/core/colors";
 
 const drawerWidth = 240;
 
@@ -58,15 +57,15 @@ export default function ClippedDrawer() {
             <img
               src={logo}
               height="50px"
-              style={({ marginRight: "50px" }, { marginBottom: "10px" })}
+              style={{ marginBottom: "10px" }}
               align="center"
               alt="50px"
             />
-
             <Typography
               style={{ marginLeft: "25px" }}
               variant="h4"
               display="inline"
+              align="center"
               color="textSecondary"
             >
               Kinte Chai Admin
@@ -108,13 +107,13 @@ export default function ClippedDrawer() {
               </ListItemIcon>
               <ListItemText primary="Orders" />
             </ListItem>
-            <Divider />
             <ListItem button>
               <ListItemIcon>
                 <Settings />
               </ListItemIcon>
               <ListItemText primary="Settings" />
             </ListItem>
+            <Divider />
             <ListItem button>
               <ListItemIcon>
                 <PowerSettingsNew />
