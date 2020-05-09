@@ -1,17 +1,25 @@
 import React from "react";
 //import logo from "./logo.svg";
 import "./App.css";
-import login from "./Pages/login";
+import Login from "./Pages/login";
 import { Switch, Route } from "react-router-dom";
+import Dashboard from "./Pages/Dashboard";
+import Authenticated from "./Components/Authenticated";
 //import { Switch, Route } from "react-dom";
 
 function App() {
   return (
     <Switch>
       <Route exact path="/">
-        dashboard
+        <Authenticated>
+          <Dashboard />
+        </Authenticated>
       </Route>
-      <Route exact path="/login" component={login} />
+      <Route exact path="/login">
+        <Authenticated nonAuthenticated={true}>
+          <Login />
+        </Authenticated>
+      </Route>
       <Route path="*" render={() => "404 Not Found!"} />
     </Switch>
   );

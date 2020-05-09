@@ -9,7 +9,7 @@ import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import { BrowserRouter } from "react-router-dom";
 import { blueGrey } from "@material-ui/core/colors";
 //import { createstore, applyMiddleware, compose } from "redux";
-//import rootReducer from "./Components/Reducers/rootReducer";
+// import rootReducer from "./Components/Reducers/rootReducer";
 //import blue from "@material-ui/core/colors/blue";
 
 // const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
