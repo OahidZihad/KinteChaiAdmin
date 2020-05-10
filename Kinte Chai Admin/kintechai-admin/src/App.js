@@ -11,9 +11,9 @@ function App() {
   return (
     <Switch>
       <Route exact path="/">
-        <Authenticated>
-          <Dashboard />
-        </Authenticated>
+        {/* <Authenticated> */}
+        <Dashboard />
+        {/* </Authenticated> */}
       </Route>
       <Route exact path="/login">
         <Authenticated nonAuthenticated={true}>
