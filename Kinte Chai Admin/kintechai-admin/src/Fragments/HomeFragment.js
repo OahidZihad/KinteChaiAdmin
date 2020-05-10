@@ -8,6 +8,8 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import { Container, Avatar } from "@material-ui/core";
 import BannerSlider from "../Components/BannerSlider";
+import ProductView from "../Components/ProductView";
+import HorizontalScroller from "../Components/HorizontalScroller";
 
 export class HomeFragment extends Component {
   constructor(props) {
@@ -53,6 +55,7 @@ export class HomeFragment extends Component {
           </Tabs>
         </AppBar>
         <BannerSlider Images={[{ image: "fsfdfs" }]} />
+        <HorizontalScroller />
       </Container>
     );
   }
