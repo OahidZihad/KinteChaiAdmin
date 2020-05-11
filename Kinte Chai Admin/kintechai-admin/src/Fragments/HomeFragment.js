@@ -12,6 +12,10 @@ import ProductView from "../Components/ProductView";
 import HorizontalScroller from "../Components/HorizontalScroller";
 import StripAdView from "../Components/StripAdView";
 import GridView from "../Components/GridView";
+import { loadCategories } from "../Components/Actions/categoryActions";
+import { connect } from "react-redux";
+import { createStore } from "redux";
+import { Home, Category } from "@material-ui/icons";
 
 export class HomeFragment extends Component {
   constructor(props) {
@@ -27,6 +31,12 @@ export class HomeFragment extends Component {
     });
   };
 
+  componentDidMount() {
+    if (this.props.categories === null) {
+      this.props.loadCategories();
+    }
+  }
+
   render() {
     return (
       <Container maxWidth="md" fixed>
@@ -40,20 +50,19 @@ export class HomeFragment extends Component {
             scrollButtons="auto"
             aria-label="scrollable auto tabs example"
           >
-            <Tab icon={<CategoryTab />} />
-            <Tab icon={<CategoryTab />} />
-            <Tab icon={<CategoryTab />} />
-            <Tab icon={<CategoryTab />} />
-            <Tab icon={<CategoryTab />} />
-            <Tab icon={<CategoryTab />} />
-            <Tab icon={<CategoryTab />} />
-            <Tab icon={<CategoryTab />} />
-            <Tab icon={<CategoryTab />} />
-            <Tab icon={<CategoryTab />} />
-            <Tab icon={<CategoryTab />} />
-            <Tab icon={<CategoryTab />} />
-            <Tab icon={<CategoryTab />} />
-            <Tab icon={<CategoryTab />} />
+            {/* <Tab icon={<CategoryTab />} /> */}
+            {this.props.categories
+              ? this.props.categories.map((category) => (
+                  <Tab
+                    icon={
+                      <CategoryTab
+                        icon={category.icon}
+                        title={category.categoryName}
+                      />
+                    }
+                  />
+                ))
+              : null}
           </Tabs>
         </AppBar>
         <BannerSlider Images={[{ image: "fsfdfs" }]} />
@@ -65,17 +74,36 @@ export class HomeFragment extends Component {
   }
 }
 
-export const CategoryTab = () => {
+export const CategoryTab = ({ icon, title }) => {
   return (
-    <Box>
-      <Avatar
-        alt="Remy Sharp"
-        variant="square"
-        src="/static/images/avatar/1.jpg"
-      />
-      <Typography variant="body2">Title</Typography>
+    <Box textAlign="center">
+      {icon !== "null" ? (
+        <img
+          alt="Remy Sharp"
+          variant="square"
+          src={icon}
+          style={{ height: "30px", width: "50px" }}
+        />
+      ) : (
+        <Home />
+      )}
+      <Typography variant="body2" textAlign="center">
+        {title}{" "}
+      </Typography>
     </Box>
   );
 };
 
-export default HomeFragment;
+const mapStateToProps = (state) => {
+  return {
+    categories: state.categories,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loadCategories: () => dispatch(loadCategories()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeFragment);
