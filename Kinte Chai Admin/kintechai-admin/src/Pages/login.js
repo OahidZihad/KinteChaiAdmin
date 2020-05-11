@@ -7,8 +7,9 @@ import {
   CircularProgress,
   Button,
 } from "@material-ui/core";
-import logo from "../media/logo.png";
+import logo from "../media/logo1.png";
 import { firebaseAuth, firestore } from "../firebase";
+import { cyan } from "@material-ui/core/colors";
 //import { fireAuth } from "../firebase";
 
 class Login extends Component {
@@ -96,8 +97,8 @@ class Login extends Component {
           mt="110px"
         >
           <img src={logo} height="80px" alt="50px" />
-          <Typography variant="h5" color="textSecondary">
-            ADMIN
+          <Typography variant="h5">
+            <span style={{ color: cyan.A700 }}>ADMIN</span>
           </Typography>
           <TextField
             label="Email"
@@ -130,7 +131,7 @@ class Login extends Component {
           <br />
           <br />
           {this.state.show_progress ? (
-            <CircularProgress size={24} thickness={4} color="secondary" />
+            <CircularProgress size={24} thickness={4} color="primary" />
           ) : null}
           <br />
           <br />

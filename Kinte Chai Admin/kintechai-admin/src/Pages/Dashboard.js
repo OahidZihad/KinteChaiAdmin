@@ -10,7 +10,7 @@ import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-
+import { grey, blue, green } from "@material-ui/core/colors";
 import {
   Home,
   Category,
@@ -19,7 +19,7 @@ import {
   Settings,
   PowerSettingsNew,
 } from "@material-ui/icons";
-import logo from "../media/logo.png";
+import logo from "../media/logo2.png";
 import HomeFragment from "../Fragments/HomeFragment";
 
 const drawerWidth = 240;
@@ -70,7 +70,7 @@ export default function ClippedDrawer() {
               align="center"
               color="textSecondary"
             >
-              Kinte Chai Admin
+              <span style={{ color: grey[50] }}>Kinte Chai Admin</span>
             </Typography>
           </Typography>
         </Toolbar>

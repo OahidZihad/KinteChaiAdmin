@@ -10,6 +10,8 @@ import { Container, Avatar } from "@material-ui/core";
 import BannerSlider from "../Components/BannerSlider";
 import ProductView from "../Components/ProductView";
 import HorizontalScroller from "../Components/HorizontalScroller";
+import StripAdView from "../Components/StripAdView";
+import GridView from "../Components/GridView";
 
 export class HomeFragment extends Component {
   constructor(props) {
@@ -56,6 +58,8 @@ export class HomeFragment extends Component {
         </AppBar>
         <BannerSlider Images={[{ image: "fsfdfs" }]} />
         <HorizontalScroller />
+        <StripAdView />
+        <GridView />
       </Container>
     );
   }

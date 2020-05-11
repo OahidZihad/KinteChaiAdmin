@@ -8,11 +8,15 @@ const ProductView = () => {
       <img
         style={{ height: "120px", width: "120px", backgroundColor: grey[50] }}
       />
-      <Typography variant="subtitle1">Title</Typography>
-      <Typography variant="subtitle2">
+      <Typography variant="subtitle1" align="center">
+        Title
+      </Typography>
+      <Typography variant="subtitle2" align="center">
         <span style={{ color: green.A700 }}>offer</span>
       </Typography>
-      <Typography variant="h6">BDT.24500/=</Typography>
+      <Typography variant="h6" align="center">
+        BDT.24500/=
+      </Typography>
     </Box>
   );
 };

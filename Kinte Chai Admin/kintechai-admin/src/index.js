@@ -7,7 +7,7 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import { BrowserRouter } from "react-router-dom";
-import { blueGrey, lightBlue, green } from "@material-ui/core/colors";
+import { blueGrey, lightBlue, cyan } from "@material-ui/core/colors";
 // const Colors = "../constants/Colors";
 //import { createstore, applyMiddleware, compose } from "redux";
 // import rootReducer from "./Components/Reducers/rootReducer";
@@ -19,22 +19,20 @@ import { blueGrey, lightBlue, green } from "@material-ui/core/colors";
 //   composeEnhancers(applyMiddleware(thunk))
 // );
 
-const myColors = {
-  tabIconDefault: "#959292",
-  tabBar: "#fefefe",
-  errorBackground: "red",
-  errorText: "#fff",
-  warningBackground: "#EAEB5E",
-  warningText: "#666804",
-  white: "#ffffff",
-};
+// const myColors = {
+//   tabIconDefault: "#959292",
+//   tabBar: "#fefefe",
+//   errorBackground: "red",
+//   errorText: "#fff",
+//   warningBackground: "#EAEB5E",
+//   warningText: "#666804",
+//   white: "#ffffff",
+// };
+// export default myColors;
 
 const theme = createMuiTheme({
   palette: {
-    primary: {
-      main: lightBlue[200],
-      white: green[50],
-    },
+    primary: cyan,
     secondary: blueGrey,
   },
 });
