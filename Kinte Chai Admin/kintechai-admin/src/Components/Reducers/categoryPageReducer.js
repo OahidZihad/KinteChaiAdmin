@@ -1,4 +1,4 @@
-const initState = {};
+const initState = null;
 
 const categoryPageReducer = (state = initState, action) => {
   switch (action.type) {

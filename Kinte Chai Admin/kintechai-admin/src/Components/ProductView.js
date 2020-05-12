@@ -7,6 +7,7 @@ const ProductView = () => {
     <Box p="18px" bgcolor="white" boxShadow="8px" mx="4px" borderRadius="16px">
       <img
         style={{ height: "120px", width: "120px", backgroundColor: grey[50] }}
+        alt=""
       />
       <Typography variant="subtitle1" align="center">
         Title

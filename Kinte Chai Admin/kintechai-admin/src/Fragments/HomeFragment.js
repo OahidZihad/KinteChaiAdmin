@@ -29,6 +29,7 @@ export class HomeFragment extends Component {
     this.state = {
       loading: true,
       value: 0,
+      Page: "HOME",
     };
   }
 
@@ -75,7 +76,6 @@ export class HomeFragment extends Component {
               scrollButtons="auto"
               aria-label="scrollable auto tabs example"
             >
-              {/* <Tab icon={<CategoryTab />} /> */}
               {this.props.categories
                 ? this.props.categories.map((category) => (
                     <Tab
@@ -90,7 +90,30 @@ export class HomeFragment extends Component {
                 : null}
             </Tabs>
           </AppBar>
-          <BannerSlider Images={[{ image: "fsfdfs" }]} />
+
+          {this.props.categoryPages
+            ? this.props.categoryPages[this.state.Page].map((item, index) => {
+                switch (item.view_type) {
+                  case 0:
+                    let banners = [];
+                    for (
+                      let index = 1;
+                      index < item.no_of_banners + 1;
+                      index++
+                    ) {
+                      const banner = item["banner_" + index];
+                      const background =
+                        item["banner_" + index + "_background"];
+                      banners.push({ banner, background });
+                    }
+                    return <BannerSlider Images={banners} />;
+
+                  default:
+                    break;
+                }
+              })
+            : null}
+
           <HorizontalScroller />
           <StripAdView />
           <GridView />
