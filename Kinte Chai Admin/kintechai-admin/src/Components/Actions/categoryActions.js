@@ -1,6 +1,6 @@
 import { firestore } from "../../firebase";
 
-export const loadCategories = () => {
+export const loadCategories = (onSuccess, onError) => {
   return (dispatch, getstate) => {
     firestore
       .collection("CATEGORIES")
@@ -13,10 +13,12 @@ export const loadCategories = () => {
             categories.push(doc.data());
           });
           dispatch({ type: "LOAD_CATEGORIES", payload: categories });
+          onSuccess();
         }
       })
       .catch((error) => {
         console.log(error);
+        onError();
       });
   };
 };
