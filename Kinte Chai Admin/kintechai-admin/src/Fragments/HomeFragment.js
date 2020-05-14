@@ -108,15 +108,56 @@ export class HomeFragment extends Component {
                     }
                     return <BannerSlider Images={banners} />;
 
+                  case 1:
+                    return (
+                      <StripAdView
+                        image={item.strip_ad_banner}
+                        background={item.background}
+                      />
+                    );
+                  case 2:
+                    let products = [];
+                    for (
+                      let index = 1;
+                      index < item.no_of_products + 1;
+                      index++
+                    ) {
+                      let data = {};
+                      data["title"] = item["product_title_" + index];
+                      data["subtitle"] = item["product_subtitle_" + index];
+                      data["price"] = item["product_price_" + index];
+                      data["image"] = item["product_image_" + index];
+                      products.push(data);
+                    }
+                    return (
+                      <HorizontalScroller
+                        products={products}
+                        title={item.layout_title}
+                        background={item.layout_background}
+                      />
+                    );
+                  case 3:
+                    let gridproducts = [];
+                    for (let index = 1; index < 5; index++) {
+                      let data = {};
+                      data["title"] = item["product_title_" + index];
+                      data["subtitle"] = item["product_subtitle_" + index];
+                      data["price"] = item["product_price_" + index];
+                      data["image"] = item["product_image_" + index];
+                      gridproducts.push(data);
+                    }
+                    return (
+                      <GridView
+                        products={gridproducts}
+                        title={item.layout_title}
+                        background={item.layout_background}
+                      />
+                    );
                   default:
                     break;
                 }
               })
             : null}
-
-          <HorizontalScroller />
-          <StripAdView />
-          <GridView />
         </Container>
         <Backdrop style={{ zIndex: 1500 }} open={this.state.loading}>
           <CircularProgress color="primary" />
@@ -134,7 +175,7 @@ export const CategoryTab = ({ icon, title }) => {
           alt="Remy Sharp"
           variant="square"
           src={icon}
-          style={{ height: "30px", width: "50px" }}
+          style={{ height: "40px", width: "60px" }}
         />
       ) : (
         <Home />
