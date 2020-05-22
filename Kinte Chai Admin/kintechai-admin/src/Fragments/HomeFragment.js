@@ -85,6 +85,32 @@ export class HomeFragment extends Component {
                           title={category.categoryName}
                         />
                       }
+                      onClick={(e) => {
+                        if (
+                          this.props.categoryPages[
+                            category.categoryName.toUpperCase()
+                          ]
+                        ) {
+                          this.setState({
+                            Page: category.categoryName.toUpperCase(),
+                          });
+                        } else {
+                          this.setState({ loading: true });
+                          this.props.loadPage(
+                            category.categoryName.toUpperCase(),
+                            () => {
+                              this.setState({
+                                loading: false,
+                                Page: category.categoryName.toUpperCase(),
+                              });
+                            },
+                            () => {
+                              this.setState({ loading: false });
+                              ////error
+                            }
+                          );
+                        }
+                      }}
                     />
                   ))
                 : null}

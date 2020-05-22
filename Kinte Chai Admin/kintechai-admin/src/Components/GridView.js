@@ -6,7 +6,7 @@ import { cyan } from "@material-ui/core/colors";
 const GridView = (props) => {
   return (
     <Box
-      width="500px"
+      width="400px"
       style={{ background: props.background }}
       bgcolor="white"
       mx="auto"

@@ -14,9 +14,9 @@ export const loadCategoryPage = (category, onSuccess, onError) => {
           querySnapshot.forEach((doc) => {
             pagedata.push(doc.data());
           });
-          dispatch({ type: "LOAD_PAGE", payload: pagedata, category });
-          onSuccess();
         }
+        dispatch({ type: "LOAD_PAGE", payload: pagedata, category });
+        onSuccess();
       })
       .catch((error) => {
         console.log(error);
