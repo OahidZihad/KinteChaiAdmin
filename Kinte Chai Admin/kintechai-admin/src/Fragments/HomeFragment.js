@@ -18,6 +18,7 @@ import {
   FormControl,
   InputLabel,
   Select,
+  TextField,
   MenuItem,
   Toolbar,
   CircularProgress,
@@ -32,6 +33,7 @@ import { connect } from "react-redux";
 import { createStore } from "redux";
 import { Home, Add, Category, Close } from "@material-ui/icons";
 import { loadCategoryPage } from "../Components/Actions/categoryPageActions";
+import { cyan } from "@material-ui/core/colors";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -45,6 +47,8 @@ export class HomeFragment extends Component {
       value: 0,
       Page: "HOME",
       addDialog: false,
+      images: [],
+      colors: [],
     };
   }
 
@@ -76,6 +80,12 @@ export class HomeFragment extends Component {
       );
     }
   }
+
+  onFieldChang = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  };
 
   render() {
     return (
@@ -256,6 +266,8 @@ export class HomeFragment extends Component {
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
+                onChange={this.onFieldChang}
+                name="view_type"
                 value={0}
               >
                 <MenuItem value={0}>BANNER SLIDER</MenuItem>
@@ -263,6 +275,77 @@ export class HomeFragment extends Component {
                 <MenuItem value={2}>HORIZONTAL SCROLLER</MenuItem>
                 <MenuItem value={3}>GRID VIEW</MenuItem>
               </Select>
+
+              <TextField
+                label="Position"
+                id="outlined-size-small"
+                variant="outlined"
+                type="number"
+                name="position"
+                size="small"
+                onChange={this.onFieldChang}
+                margin="dense"
+              />
+
+              <Box display="flex" flexWrap="true">
+                {this.state.images.map((item, index) => (
+                  <Box margin="12px" border={2} borderColor={cyan}>
+                    <img
+                      src={URL.createObjectURL(item)}
+                      style={{
+                        height: "100px",
+                        width: "100px",
+                        backgroundColor: this.state.colors[index],
+                      }}
+                    />
+                    <br />
+                    <input
+                      id={"contained-button-" + index}
+                      type="color"
+                      hidden
+                      onChange={(e) => {
+                        let colors = this.state.colors;
+                        colors[index] = e.target.value;
+                        this.setState({
+                          colors,
+                        });
+                      }}
+                      defaultValue="#000000"
+                    />
+                    <label htmlFor={"contained-button-" + index}>
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        component="span"
+                      >
+                        Color
+                      </Button>
+                    </label>
+                  </Box>
+                ))}
+              </Box>
+
+              <input
+                accept="image/*"
+                id="contained-button-file"
+                onChange={(e) => {
+                  if (e.target.files && e.target.files[0]) {
+                    let images = this.state.images;
+                    images.push(e.target.files[0]);
+                    this.setState({
+                      images,
+                    });
+                  }
+                }}
+                hidden
+                name="images"
+                type="file"
+              />
+              <label htmlFor="contained-button-file">
+                <Button variant="contained" color="primary" component="span">
+                  Add Image
+                </Button>
+              </label>
             </FormControl>
           </Box>
         </Dialog>
