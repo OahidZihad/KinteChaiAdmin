@@ -31,7 +31,14 @@ import GridView from "../Components/GridView";
 import { loadCategories } from "../Components/Actions/categoryActions";
 import { connect } from "react-redux";
 import { createStore } from "redux";
-import { Home, Add, Category, Close } from "@material-ui/icons";
+import {
+  Home,
+  Add,
+  Category,
+  Close,
+  Delete,
+  ColorLens,
+} from "@material-ui/icons";
 import { loadCategoryPage } from "../Components/Actions/categoryPageActions";
 import { cyan } from "@material-ui/core/colors";
 
@@ -49,6 +56,7 @@ export class HomeFragment extends Component {
       addDialog: false,
       images: [],
       colors: [],
+      view_type: 0,
     };
   }
 
@@ -81,9 +89,22 @@ export class HomeFragment extends Component {
     }
   }
 
-  onFieldChang = (e) => {
+  onFieldChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
+    });
+  };
+
+  removeImage = (index) => {
+    let images = this.state.images;
+    let colors = this.state.colors;
+
+    images.splice(index, 1);
+    colors.splice(index, 1);
+
+    this.setState({
+      images,
+      colors,
     });
   };
 
@@ -266,9 +287,9 @@ export class HomeFragment extends Component {
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                onChange={this.onFieldChang}
+                onChange={this.onFieldChange}
                 name="view_type"
-                value={0}
+                defaultValue={0}
               >
                 <MenuItem value={0}>BANNER SLIDER</MenuItem>
                 <MenuItem value={1}>STRIP AD</MenuItem>
@@ -283,18 +304,24 @@ export class HomeFragment extends Component {
                 type="number"
                 name="position"
                 size="small"
-                onChange={this.onFieldChang}
+                onChange={this.onFieldChange}
                 margin="dense"
               />
 
               <Box display="flex" flexWrap="true">
                 {this.state.images.map((item, index) => (
-                  <Box margin="12px" border={2} borderColor={cyan}>
+                  <Box margin="12px">
                     <img
                       src={URL.createObjectURL(item)}
                       style={{
-                        height: "100px",
-                        width: "100px",
+                        height: "90px",
+                        width:
+                          this.state.view_type === 0
+                            ? "160px"
+                            : this.state.view_type === 1
+                            ? "210px"
+                            : 0,
+                        objectFit: "scale-down",
                         backgroundColor: this.state.colors[index],
                       }}
                     />
@@ -312,14 +339,20 @@ export class HomeFragment extends Component {
                       }}
                       defaultValue="#000000"
                     />
+                    <IconButton
+                      aria-label="delete"
+                      onClick={(e) => this.removeImage(index)}
+                    >
+                      <Delete />
+                    </IconButton>
                     <label htmlFor={"contained-button-" + index}>
-                      <Button
-                        variant="contained"
-                        color="secondary"
+                      <IconButton
+                        color="primary"
+                        aria-label="upload picture"
                         component="span"
                       >
-                        Color
-                      </Button>
+                        <ColorLens />
+                      </IconButton>
                     </label>
                   </Box>
                 ))}
@@ -341,9 +374,40 @@ export class HomeFragment extends Component {
                 name="images"
                 type="file"
               />
-              <label htmlFor="contained-button-file">
-                <Button variant="contained" color="primary" component="span">
-                  Add Image
+              {this.state.view_type === 0 && this.state.images.length < 8 ? (
+                <label htmlFor="contained-button-file">
+                  <Button variant="contained" color="primary" component="span">
+                    Add Image
+                  </Button>
+                </label>
+              ) : null}
+              {this.state.view_type === 1 && this.state.images.length < 1 ? (
+                <label htmlFor="contained-button-file">
+                  <Button variant="contained" color="primary" component="span">
+                    Add Image
+                  </Button>
+                </label>
+              ) : null}
+
+              <Box style={{ backgroundColor: this.state.layout_bg }}>
+                <TextField id="filled-basic" label="Title" variant="filled" />
+              </Box>
+              <input
+                id={"contained-button-title"}
+                type="color"
+                hidden
+                onChange={this.onFieldChange}
+                name="layout_bg"
+                defaultValue="#ffffff"
+              />
+              <label htmlFor={"contained-button-title"}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  aria-label="upload picture"
+                  component="span"
+                >
+                  Select Layout Background
                 </Button>
               </label>
             </FormControl>
